@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h1>所有微博</h1>
+<hr>
+<ul>
+    {% for article in all_articles %}
+    <li><a href="/article/read?article_id={{ article.id }}">{{ article.title }}</a></li>
+    {% endfor %}
+</ul>
+{% endblock %}

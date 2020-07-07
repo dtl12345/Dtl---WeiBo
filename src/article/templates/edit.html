@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<form action="/article/edit" method="POST">
+    标题：<input type="text" name="title" value="{{ article.title }}">
+    <hr>
+
+    正文：
+    <br>
+    <textarea name="content" rows="20" cols="80">{{ article.content }}</textarea>
+    <br>
+
+    <input type="hidden" name="article_id" value="{{ article.id }}" >
+
+    <input type="submit" value="提交">
+</form>
+
+{% endblock %}

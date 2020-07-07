@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+<h2>当前用户：{{ user.username }}</h2>
+
+<hr>
+
+<ul>
+    <li>ID：{{ user.id }}</li>
+    <li>性别：{{ user.gender }}</li>
+    <li>生日：{{ user.birthday }}</li>
+    <li>城市：{{ user.city }}</li>
+    <li>简介：{{ user.bio }}</li>
+</ul>
+
+<a href="/user/logout">退出</a>
+{% endblock %}
