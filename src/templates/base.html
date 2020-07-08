@@ -1,74 +1,98 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh">
     <head>
-        <title>文章</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="/static/css/bootstrap.min.css">
+
+        <title>迷你微博</title>
 
         <style>
-            body {
-                margin: 0 auto;
-                width: 960px;
-            }
+            body { margin: 0 auto; padding: 0; }
 
-            .navbar {
-                padding: 50px;
-                font-size: 2em;
-                background-color: lightslategray;
-            }
-            .navbar a { color: orange; }
+            h1 { margin: 30px 0; }
 
-            .container {
-                width: 960px;
-                margin: 0 auto;
-            }
-
-            .content {
-                width: 960px;
-                height: 800px;
-                background-color: khaki;
-                float: left;
-            }
-
-            
             .footbar {
                 padding: 30px 0;
-                clear: both;
                 font-size: 0.6em;
                 color: gray;
-                background-color:greenyellow;
                 text-align: center;
             }
         </style>
-        
-        {% block ext_css %}{% endblock %}
     </head>
 
     <body>
-      
-        <div class="navbar">
-            <a href="#">微博首页</a>
-            <a href="#">所有微博</a>
-            <a href="#">热门微博</a>
-            <a href="#">我的微博</a>
+        <!-- 导航栏 -->
+        <nav class="navbar navbar-expand navbar-dark bg-dark">
+            <a class="navbar-brand" href="/">
+              <img src="/static/img/logo.png" width="30" class="d-inline-block align-top" alt="" loading="lazy">
+              迷你微博
+            </a>
 
-        </div>
+            <div class="collapse navbar-collapse justify-content-between">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="/">首页 <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">关注的人</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">粉丝列表</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">热门微博</a>
+                    </li>
+                </ul>
 
-        <div class="container">
-
-           
-            <div class="content">
-                {% block content %}{% endblock %}
+                <ul class="navbar-nav">
+                    {% if 'uid' in session %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/info">{{ session.username }}</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/article/post">发微博</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/logout">退出</a>
+                    </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/register">注册</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/user/login">登录</a>
+                    </li>
+                    {% endif %}
+                </ul>
             </div>
+        </nav>
 
-           
+        <!-- 内容容器 -->
+        <div class="container">
+            <div class="row">
+                <!-- 内容区 -->
+                <div class="col-sm-8">
+                    {% block content %}{% endblock %}
+                </div>
 
+                <!-- 边栏 -->
+                <div class="col-sm-4">
+                    {% block sidebar %}{% endblock %}
+                </div>
+            </div>
         </div>
 
         <!-- 底栏 -->
         <div class="footbar">
-           微博互联网有限公司
+            版权所有 @ DTL
         </div>
 
-        <!-- 某些页面独有的JS -->
-        {% block ext_js %}{% endblock %}
+        <!-- JS -->
+        <script src="/static/js/jquery-3.5.1.slim.min.js"></script>
+        <script src="/static/js/popper.min.js"></script>
+        <script src="/static/js/bootstrap.min.js"></script>
     </body>
 </html>

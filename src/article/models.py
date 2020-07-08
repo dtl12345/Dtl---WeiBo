@@ -1,4 +1,4 @@
-from orm import db
+from libs.db import db
 
 
 class Article(db.Model):
@@ -7,6 +7,12 @@ class Article(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     uid = db.Column(db.Integer, nullable=False, index=True)
-    title = db.Column(db.String(32), nullable=False, index=True)
     content = db.Column(db.Text)
     created = db.Column(db.DateTime, nullable=False)
+    updated = db.Column(db.DateTime, nullable=False)
+
+    @property
+    def user(self):
+        if not hasattr(self, '_user'):
+            self._user = User.query.get(self.uid)
+        return self._user

@@ -2,18 +2,23 @@
 
 {% block content %}
 
-<h1>{{ article.title }}</h1>
-<hr>
-<div>
-    作者：<span>{{ user.username }}</span>
-    时间：<span>{{ article.created }}</span>
-    <a href="/article/edit?article_id={{ article.id }}">修改</a>
-    <a href="/article/delete?article_id={{ article.id }}">删除</a>
+<div style="margin-top: 30px;">
+    <img class="rounded" src="{{ article.user.avatar }}" width="20px">
+    <span class="text-primary">{{ article.user.username }}</span>:
 </div>
 
+<hr>
+
 <p>
-    {{ article.content | replace('\n', '<br>') | safe }}
+    {{ article.content | replace('\n', '</br>') | safe }}
 </p>
 
+<hr>
+
+<div class="row justify-content-end">
+    <a href="/article/edit?wid={{ article.id }}">修改微博</a>
+    &nbsp;&nbsp;&nbsp;
+    <span class="text-secondary">{{ article.updated }}</span>
+</div>
 
 {% endblock %}

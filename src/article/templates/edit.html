@@ -6,7 +6,35 @@
 <form action="/article/edit" method="POST">
     标题：<input type="text" name="title" value="{{ article.title }}">
     <hr>
+    {% extends "base.html" %}
 
+    {% block content %}
+    <h1>修改微博</h1>
+    
+    <hr>
+    
+    {% if err %}
+    <div class="alert alert-danger" role="alert">
+        {{ err }}
+    </div>
+    {% endif %}
+    
+    <form action="/weibo/edit" method="POST">
+    
+        <div class="form-group row">
+            <label class="col-sm-2 col-form-label">微博内容</label>
+            <div class="col-sm">
+                <textarea class="form-control" placeholder="请输入微博内容" name="content" rows="5">
+                    {{ weibo.content }}
+                </textarea>
+            </div>
+        </div>
+    
+        <input type="hidden" name="wid" value="{{ weibo.id }}">
+        <button type="submit" class="btn btn-primary offset-md-2">提交</button>
+    </form>
+    {% endblock %}
+    
     正文：
     <br>
     <textarea name="content" rows="20" cols="80">{{ article.content }}</textarea>

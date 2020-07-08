@@ -1,6 +1,6 @@
 import enum
 
-from orm import db
+from libs.db import db
 
 
 class Gender(enum.Enum):
@@ -17,6 +17,8 @@ class User(db.Model):
     username = db.Column(db.String(20), nullable=False, unique=True, index=True)
     password = db.Column(db.String(20))
     gender = db.Column(db.Enum(Gender), default='unknow')
-    city = db.Column(db.String(20), nullable=False)
+    location = db.Column(db.String(20), nullable=False)
     birthday = db.Column(db.Date, default='1990-01-01')
     bio = db.Column(db.Text)
+    created = db.Column(db.DateTime)
+    avatar = db.Column(db.String(128), default='/static/img/default.jpg')
